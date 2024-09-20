@@ -1,0 +1,19 @@
+<div class="post-card">
+
+    <h2 class="post-title">{{data.title}}</h2>
+    <p class="post-body">{{data.body}}</p>
+    
+    <div class="post-tags">
+        <span>Tags: </span>
+        <span *ngFor="let tag of data.tags"  class="tag">{{tag}}</span>
+        
+    </div>
+    <div class="post-info">
+        <span class="views">Views: {{data.views}}</span>
+        <span class="reactions">Likes: {{data.reactions.likes}} | Dislikes: {{data.reactions.dislikes}}</span>
+        <span class="user-id">User: {{data.userId}}</span>
+    <button (click)="Delete(data.id)">Delete</button>
+    <!-- <button (click)="delete(data.id)">Delete</button> -->
+    </div>
+
+</div>

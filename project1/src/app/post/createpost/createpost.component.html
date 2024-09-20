@@ -1,0 +1,49 @@
+<p>createpost works!</p>
+<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="title">Title</label>
+      <input id="title" formControlName="title" type="text" placeholder="Post title" />
+      <div *ngIf="postForm.get('title')?.invalid && postForm.get('title')?.touched">
+        <span *ngIf="postForm.get('title')?.errors?.['required']">Title is required.</span>
+        <span *ngIf="postForm.get('title')?.errors?.['maxLength']">Title is too long.</span>
+      </div>
+    </div>
+  
+    <div>
+      <label for="body">Body</label>
+      <textarea id="body" formControlName="body" placeholder="Post body"></textarea>
+      <div *ngIf="postForm.get('body')?.invalid && postForm.get('body')?.touched">
+        <span *ngIf="postForm.get('body')?.errors?.['required']">Body is required.</span>
+        <span *ngIf="postForm.get('body')?.errors?.['minLength']">Body must be at least 10 characters long.</span>
+      </div>
+    </div>
+  
+    <div formArrayName="tags">
+      <label>Tags</label>
+      <div *ngFor="let tag of tags.controls; let i = index">
+        <input [formControlName]="i" placeholder="Tag" />
+        <button type="button" (click)="removeTag(i)">Remove Tag</button>
+      </div>
+      <button type="button" (click)="addTag()">Add Tag</button>
+    </div>
+  
+    <div formGroupName="reactions">
+      <label for="likes">Likes</label>
+      <input id="likes" formControlName="likes" type="number" />
+      <label for="dislikes">Dislikes</label>
+      <input id="dislikes" formControlName="dislikes" type="number" />
+    </div>
+  
+    <div>
+      <label for="views">Views</label>
+      <input id="views" formControlName="views" type="number" />
+    </div>
+  
+    <div>
+      <label for="userId">User ID</label>
+      <input id="userId" formControlName="userId" type="number" />
+    </div>
+  
+    <button type="submit" [disabled]="postForm.invalid">Create Post</button>
+    <button (click)="patchFormWithData()">patchvalue</button>
+  </form>
